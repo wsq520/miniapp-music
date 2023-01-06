@@ -1,0 +1,99 @@
+<van-search
+  value="{{ searchValue }}"
+  shape="round"
+  background="#fafafa"
+  placeholder="请输入搜索关键词"
+  bind:click-input="onSearchClick"
+/>
+
+<!-- 轮播图 -->
+<swiper 
+    class="banner" 
+    circular 
+    autoplay 
+    indicator-dots 
+    style="height: {{bannerHeight}}px;"
+    wx:if="{{banners.length}}">
+    <block wx:for="{{banners}}" wx:key="targetId">
+        <swiper-item class="item">
+            <image 
+                class="banner-image" 
+                src="{{item.imageUrl}}" 
+                mode="widthFix"
+                bindload="onBannerImageLoad"
+            />
+        </swiper-item>
+    </block>
+</swiper>
+
+<!-- 推荐歌曲 -->
+<view class="recommend" wx:if="{{recommendSongs.length}}"> 
+    <area-header title="推荐歌曲" bind:moreclick="onRecommendMoreClick"/>
+    <view class="list">
+        <block wx:for="{{recommendSongs}}" wx:key="id">
+           <song-item-v1 
+                itemData="{{item}}" 
+                data-index="{{index}}" 
+                bindtap="onSongItemTap"
+           />
+        </block>
+    </view>
+</view>
+
+<!-- 热门歌单 -->
+<!-- <view class="hot-menu">
+    <area-header title="热门歌单"/>
+    <scroll-view 
+        class="hot-list" 
+        scroll-x 
+        enable-flex
+        style="width: {{screenWidth}}px;">
+        <block wx:for="{{hotMenuList}}" wx:key="id">
+        <view  class="item">
+            <menu-item itemData="{{item}}"/>
+        </view>
+        </block>
+    </scroll-view>
+</view> -->
+<menu-area title="热门歌单" menuList="{{hotMenuList}}"/>
+
+<!-- 推荐歌单 -->
+<menu-area title="推荐歌单" menuList="{{recommendMenuList}}"/>
+
+<!-- 巅峰榜 -->
+<view class="ranking" wx:if="{{isRankingData}}">
+    <area-header title="巅峰榜" hasMore="{{false}}"/>
+    <view class="ranking-list">
+        <!-- for遍历对象 index对应key item对应就是value -->
+        <block wx:for="{{rankingInfos}}" wx:key="id">
+          <ranking-item itemData="{{item}}" key="{{index}}"/>
+        </block>
+    </view>
+</view>
+
+<!-- 播放栏 -->
+<view 
+    class="play-bar-placeholder" 
+    wx:if="{{currentSong.name || isPlaying}}">
+</view>
+<view class="play-bar" wx:if="{{currentSong.name || isPlaying}}">
+    <view class="left">
+        <!-- 旋转图片时 应该通过animation-play-state控制动画状态 不应该把
+        album-anim类移除 不然动画暂停后图片复位 -->
+        <image 
+            class="album album-anim" 
+            style="animation-play-state: {{ isPlaying ? 'running' : 'paused' }};"
+            src="{{currentSong.al.picUrl}}"
+            bindtap="onPlayerAlbumTap"
+        />
+        <view class="name">{{currentSong.name}}</view>
+    </view>
+    <view class="right">
+        <image 
+        class="play" 
+        src="/assets/images/music/{{ isPlaying ? 'pause':'play' }}_icon.png"
+        bindtap="onPlayOrPauseBtnTap"
+        />
+        <image class="icon" src="/assets/images/music/playlist_icon.png"/>
+    </view>
+</view>

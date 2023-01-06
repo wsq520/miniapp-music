@@ -1,0 +1,17 @@
+/* components/menu-area/meun-area.wxss */
+
+.list {
+    margin-left: -24rpx;
+    /* 确保不换行 */
+    white-space: nowrap;
+}
+
+.list .item {
+    display: inline-block;
+    width: 220rpx;
+    margin-left: 24rpx;
+}
+
+.list .item:last-of-type {
+    margin-right: 24rpx;
+}

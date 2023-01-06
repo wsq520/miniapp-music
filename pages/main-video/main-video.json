@@ -1,0 +1,9 @@
+{
+    "usingComponents": {
+        "video-item": "/components/video-item/video-item"
+    },
+    "onReachBottomDistance": 100,
+    "enablePullDownRefresh": true,
+    "backgroundColor": "#f3f5f5",
+    "backgroundTextStyle": "dark"
+}

@@ -1,0 +1,20 @@
+<view class="nav-bar">
+    <view class="status" style="height: {{statusBarHeight}}px;"></view>
+    <view class="nav">
+        <view class="left" bindtap="onLeftClick">
+            <view class="slot">
+                <slot name="left"></slot>
+            </view>
+            <view class="default">
+                <van-icon class="icon" name="arrow-left"  size="20px" style="margin-top: 14rpx;"/>
+            </view>
+        </view>
+        <view class="center">
+            <view class="slot">
+                <slot name="center"></slot>
+            </view>
+            <view class="default">{{title}}</view> 
+        </view>
+        <view class="right"></view>
+    </view>
+</view>
